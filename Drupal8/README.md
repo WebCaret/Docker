@@ -2,6 +2,9 @@
 
 ## Overview
 
+This is a striped down version of https://github.com/drubb/docker-drupal-lamp70
+
+I altered it to suit our working envoirment. So if you want phpmyadmin and PROST use the above repo.
 This is a Dockerfile and some configuration files to spin up a local development / runtime environment for Drupal development. It should be suitable for other PHP projects too, with minor adjustments.
 Manage your project files using your favorite host based development tools (IDE, Sass, Compass, Bundler, ...). They are mounted inside the container's web root. MySQL data is kept persistent using another mounted folder.
 The container shares ports 80, 3306 and 9000 with the host, for browsing, access to MySQL data and debugging
@@ -15,14 +18,12 @@ The container shares ports 80, 3306 and 9000 with the host, for browsing, access
 * OPcache PHP builtin opcode cache
 * MemCached service and php extension
 * Xdebug php extension
-* PhpMyAdmin (latest version)
 * PEAR and PECL package managers
 * Composer (latest version)
 * Git (latest version)
 * Drush (latest stable)
 * Drupal Console (latest stable)
 * ZSH / Oh-My-ZSH
-* PROST drupal deployment scripts, see https://www.drupal.org/sandbox/axroth/1668300
 * Several command line tools like mc, htop, curl, wget, patch, vim
 
 This is a localized german version, but it should be easy to adjust this
@@ -36,7 +37,7 @@ You should have installed the following tools:
 
 ## Usage
 
-* Clone this repository: git clone https://github.com/drubb/docker-drupal-lamp70.git
+* Clone this repository, and copy the Drupal8 folder.
 * Make adjustments to Dockerfile and config files, if needed, e.g. for localization, git user, mail server, ...
 * Add your ssh keys to .ssh folder, if needed for connections to external servers, e.g. repos
 * Optionally, create and populate a web root for your project files, e.g. 'www'
@@ -67,7 +68,7 @@ In this case, you would be browsing using localhost:8080, and your external conn
 would use the ports 3307 and 9001. You might also assign different IPs, consult the docker documentation for details.
 
 Want some shellscript magic? Replace `myhostname` and `myproject` by `${PWD##*/}`
-to use the last part of your project's folder path instead.
+to use the last part of your project's folder path instead. This probably does not work in fish.
 
 ## Working with the container
 
@@ -92,7 +93,7 @@ Use instead:
 
 Besides your web root, there are two special paths you can lookup in your browser:
 
-You can use **PhpMyAdmin** under /phpmyadmin, and view the status of **Zend** opcode cache under /opcache.
+You can view the status of **Zend** opcode cache under /opcache.
 
 Want to stop the container? Just type **exit**!
 
